@@ -39,6 +39,11 @@ const AppointmentForm = () => {
     navigate('/appointments');
   };
 
+  const handleCancel = () => {
+    // Navigate back to student dashboard
+    navigate('/student');
+  };
+
   return (
     <Box>
       <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#1976d2' }}>
@@ -115,15 +120,15 @@ const AppointmentForm = () => {
             <Stack direction="row" spacing={2} justifyContent="flex-end">
               <Button
                 variant="outlined"
+                color="inherit"
+                onClick={handleCancel}
                 startIcon={<CancelIcon />}
-                onClick={() => navigate('/appointments')}
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 variant="contained"
-                startIcon={<SaveIcon />}
                 sx={{
                   bgcolor: '#1976d2',
                   '&:hover': { bgcolor: '#1565c0' },

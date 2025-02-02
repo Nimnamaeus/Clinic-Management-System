@@ -4,28 +4,24 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
+  Box,
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
-  People as PeopleIcon,
-  LocalHospital as HospitalIcon,
-  EventNote as EventNoteIcon,
-  Assessment as AssessmentIcon,
-  Settings as SettingsIcon,
+  CalendarToday as CalendarIcon,
+  Person as PersonIcon,
+  Assignment as AssignmentIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
-const Sidebar = ({ open, onClose }) => {
+const Sidebar = ({ userType, open, onClose }) => {
   const navigate = useNavigate();
 
-  const menuItems = [
-    { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
-    { text: 'Students', icon: <PeopleIcon />, path: '/students' },
-    { text: 'Employees', icon: <HospitalIcon />, path: '/employees' },
-    { text: 'Appointments', icon: <EventNoteIcon />, path: '/appointments' },
-    { text: 'Reports', icon: <AssessmentIcon />, path: '/reports' },
-    { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+  const employeeMenuItems = [
+    { text: 'Dashboard', icon: <DashboardIcon />, path: '/employee' },
+    { text: 'Appointments', icon: <CalendarIcon />, path: '/employee/appointments' },
+    { text: 'Patients', icon: <PersonIcon />, path: '/employee/patients' },
+    { text: 'Reports', icon: <AssignmentIcon />, path: '/employee/reports' },
   ];
 
   const handleNavigation = (path) => {
@@ -40,26 +36,38 @@ const Sidebar = ({ open, onClose }) => {
       onClose={onClose}
       variant="temporary"
       sx={{
-        width: 240,
-        flexShrink: 0,
         '& .MuiDrawer-paper': {
           width: 240,
           boxSizing: 'border-box',
+          top: '64px',
+          height: 'calc(100% - 64px)',
+          borderTop: 'none',
+          zIndex: 1100,
+        },
+        '& .MuiBackdrop-root': {
+          top: '64px',
         },
       }}
     >
-      <List sx={{ mt: 8 }}>
-        {menuItems.map((item) => (
-          <ListItem
-            button
-            key={item.text}
-            onClick={() => handleNavigation(item.path)}
-          >
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
-          </ListItem>
-        ))}
-      </List>
+      <Box sx={{ overflow: 'auto' }}>
+        <List>
+          {employeeMenuItems.map((item) => (
+            <ListItem
+              button
+              key={item.text}
+              onClick={() => handleNavigation(item.path)}
+              sx={{
+                '&:hover': {
+                  bgcolor: '#f5f5f5',
+                },
+              }}
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          ))}
+        </List>
+      </Box>
     </Drawer>
   );
 };

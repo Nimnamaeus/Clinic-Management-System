@@ -5,6 +5,10 @@ import {
   Typography,
   Container,
   Paper,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,13 +17,31 @@ const Login = () => {
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
+    userType: '',
   });
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add authentication logic here
-    navigate('/');
+    
+    // Mock authentication - in a real app, this would be an API call
+    if (credentials.username && credentials.password && credentials.userType) {
+      // Store user type and authentication status
+      localStorage.setItem('userType', credentials.userType);
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userId', '123'); // Mock user ID
+      
+      // Navigate based on user type
+      handleLogin(credentials.userType);
+    }
+  };
+
+  const handleLogin = (userType) => {
+    if (userType === 'student') {
+      navigate('/student');
+    } else if (userType === 'employee') {
+      navigate('/employee');
+    }
   };
 
   return (
@@ -34,8 +56,8 @@ const Login = () => {
           alignItems: 'center',
         }}
       >
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+          Clinic Management System
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
@@ -66,6 +88,21 @@ const Login = () => {
               setCredentials({ ...credentials, password: e.target.value })
             }
           />
+          <FormControl fullWidth margin="normal" required>
+            <InputLabel id="user-type-label">Login As</InputLabel>
+            <Select
+              labelId="user-type-label"
+              id="user-type"
+              value={credentials.userType}
+              label="Login As"
+              onChange={(e) =>
+                setCredentials({ ...credentials, userType: e.target.value })
+              }
+            >
+              <MenuItem value="student">Student</MenuItem>
+              <MenuItem value="employee">Employee</MenuItem>
+            </Select>
+          </FormControl>
           <Button
             type="submit"
             fullWidth

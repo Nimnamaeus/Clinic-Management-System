@@ -15,6 +15,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { Download as DownloadIcon } from '@mui/icons-material';
+import BackButton from '../common/BackButton';
 
 const Reports = () => {
   const [reportType, setReportType] = useState('');
@@ -54,7 +55,8 @@ const Reports = () => {
 
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
+      <BackButton />
+      <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold', color: '#1976d2' }}>
         Reports
       </Typography>
 

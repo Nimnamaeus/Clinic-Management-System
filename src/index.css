@@ -20,7 +20,7 @@ code {
 
 /* Remove any conflicting styles */
 .MuiBox-root {
-  box-sizing: border-box;
+  padding-top: 48px; /* Match navbar height */
 }
 
 /* Ensure navbar stays on top */
@@ -33,22 +33,22 @@ code {
   z-index: 1200;
 }
 
-/* Ensure proper spacing for the main content */
-.MuiBox-root {
-  padding-top: 64px; /* Height of the navbar */
-}
-
-/* Fix sidebar positioning */
+/* Update drawer positioning */
 .MuiDrawer-paper {
-  margin-top: 64px !important; /* Height of the navbar */
-  height: calc(100% - 64px) !important;
-  overflow-y: auto;
+  margin-top: 0 !important; /* Remove margin-top */
+  height: calc(100% - 48px) !important;
 }
 
 /* Adjust main content area */
 main {
-  margin-left: 240px; /* Width of the sidebar */
-  padding: 24px;
-  width: calc(100% - 240px);
+  padding-top: 48px; /* Match navbar height */
+  margin-left: 0; /* Remove default margin */
+  width: 100%;
   box-sizing: border-box;
+}
+
+/* When sidebar is open */
+main.sidebar-open {
+  margin-left: 240px;
+  width: calc(100% - 240px);
 } 

@@ -24,6 +24,7 @@ import {
   FilterList as FilterIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import BackButton from '../common/BackButton';
 
 const AppointmentList = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const AppointmentList = () => {
 
   return (
     <Box>
+      <BackButton />
       <Stack
         direction="row"
         justifyContent="space-between"

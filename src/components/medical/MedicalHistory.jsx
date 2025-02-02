@@ -33,7 +33,7 @@ import {
 } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 
-const MedicalHistory = () => {
+const MedicalHistory = ({ userType }) => {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState(0);
   const [patientInfo, setPatientInfo] = useState({
@@ -56,11 +56,26 @@ const MedicalHistory = () => {
     // Add more records
   ]);
 
+  const studentId = localStorage.getItem('userId'); // Get current student's ID
+
+  useEffect(() => {
+    // In a real app, fetch only the current student's medical history
+    if (userType === 'student') {
+      // Fetch medical history for current student only
+      fetchStudentMedicalHistory(studentId);
+    }
+  }, [studentId]);
+
+  const fetchStudentMedicalHistory = async (id) => {
+    // Implement API call to fetch medical history
+    // Make sure the backend validates that the student can only access their own records
+  };
+
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
-          Medical History
+          My Medical History
         </Typography>
         <Button
           variant="contained"

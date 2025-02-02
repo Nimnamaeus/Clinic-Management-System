@@ -31,6 +31,7 @@ import {
   Delete as DeleteIcon,
   Save as SaveIcon,
 } from '@mui/icons-material';
+import BackButton from '../common/BackButton';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -82,7 +83,8 @@ const Settings = () => {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#1976d2' }}>
+      <BackButton />
+      <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold', color: '#1976d2' }}>
         Settings
       </Typography>
 
